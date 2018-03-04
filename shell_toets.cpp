@@ -3,8 +3,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <vector>
 
 using namespace std;
+
+void getOptions(int,char**,char*);
 
 int main(int argc, char **argv)
 {
@@ -29,16 +32,20 @@ int main(int argc, char **argv)
         	//cout << argv[i][0] << endl;
 
             //as dit 'n option is
-            if(argv[i][0] == '-' && (unsigned)strlen(argv[i]) == 2)
-                cout << argv[i] << endl;
+            /*if(argv[i][0] == '-' && (unsigned)strlen(argv[i]) == 2)
+                cout << argv[i] << endl;*/
 
             //as dit 'n argument is
-            else if(argv[i][0] != '-')
+            if(argv[i][0] != '-')
                 cout << argv[i] << endl;
 
             else 
                 cout << "Don't recognize this character: " << argv[i] << endl;
         }
+
+        //char* v = new char[3];
+        vector<char> v;
+        getOptions(argc, argv, v);
     }
 
     else // parent process
@@ -48,3 +55,32 @@ int main(int argc, char **argv)
 
     return EXIT_SUCCESS;
 }
+
+//&& (unsigned)strlen(_argv[i]) > 1
+/*void getOptions(int _argc, char** _argv, char* _options)
+{
+    for(int i = 0; i < _argc; ++i)
+        if(_argv[i][0] == '-')
+        {
+            *_options = _argv[i][1];
+            cout << _options << endl;
+            _options++;
+        }
+}/**/
+
+/*
+    - Hulle het hier waar hulle die & voor die vektor sit om te se dis die pointer na
+    die vektor toe seker.
+    - Doen 'n toets waar jy kyk hoe hulle die vektors tussen die funksies stuur.
+*/
+/*
+void getOptions(int _argc, char** _argv, vector<char> &_options)
+{
+    for(int i = 0; i < _argc; ++i)
+        if(_argv[i][0] == '-')
+        {
+            //die * om te se dat die waarde van die pointer is
+            _options.push_back((char)_argv[i][1]);
+            cout << _options[i-1] << endl;
+        }
+}/**/
